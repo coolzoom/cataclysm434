@@ -4766,6 +4766,90 @@ public:
     }
 };
 
+class spell_simulate_alliance_presence: public SpellScriptLoader
+{
+public:
+    spell_simulate_alliance_presence() : SpellScriptLoader("spell_simulate_alliance_presence") { }
+
+    enum goId
+    {
+        GO_TRIGGER = 208828
+    };
+
+    class spell_simulate_alliance_presence_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_simulate_alliance_presence_SpellScript);
+
+        SpellCastResult CheckCast()
+        {
+            if (GameObject* trigger = GetCaster()->FindNearestGameObject(GO_TRIGGER, 15.0f))
+                return SPELL_CAST_OK;
+
+            return SPELL_FAILED_BAD_TARGETS;
+        }
+
+        void HandleTalk()
+        {
+            if (Unit* caster = GetCaster())
+            {
+                if (Creature* creature = caster->ToCreature())
+                    creature->AI()->Talk(0);
+            }
+        }
+
+        void Register()
+        {
+            OnCheckCast += SpellCheckCastFn(spell_simulate_alliance_presence_SpellScript::CheckCast);
+            AfterCast += SpellCastFn(spell_simulate_alliance_presence_SpellScript::HandleTalk);
+        }
+    };
+
+    SpellScript* GetSpellScript() const
+    {
+        return new spell_simulate_alliance_presence_SpellScript();
+    }
+};
+
+class spell_throw_frog : public SpellScriptLoader
+{
+public:
+    spell_throw_frog() : SpellScriptLoader("spell_throw_frog") { }
+
+    enum npcId
+    {
+        NPC_MOAT_MONSTER = 53590
+    };
+
+    class spell_throw_frog_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_throw_frog_SpellScript);
+
+        SpellCastResult CheckCast()
+        {
+            if (Unit* caster = GetCaster())
+            {
+                if (Creature* moatMonster = GetCaster()->FindNearestCreature(NPC_MOAT_MONSTER, 30.0f))
+                {
+                    if (caster->GetTypeId() == TYPEID_PLAYER)
+                        caster->ToPlayer()->KilledMonsterCredit(53592);
+                    return SPELL_CAST_OK;
+                }
+            }
+            return SPELL_FAILED_BAD_TARGETS;
+        }
+
+        void Register()
+        {
+            OnCheckCast += SpellCheckCastFn(spell_throw_frog_SpellScript::CheckCast);
+        }
+    };
+
+    SpellScript* GetSpellScript() const
+    {
+        return new spell_throw_frog_SpellScript();
+    }
+};
+
 void AddSC_generic_spell_scripts()
 {
     new spell_gen_absorb0_hitlimit1();
@@ -4892,4 +4976,6 @@ void AddSC_generic_spell_scripts()
     new spell_pilgrims_bounty_buff_food("spell_gen_candied_sweet_potato", SPELL_WELL_FED_HASTE_TRIGGER);
     new spell_depth_charge_countdown_pulse();
     new spell_gen_lightning_strike();
+    new spell_simulate_alliance_presence();
+    new spell_throw_frog();
 }

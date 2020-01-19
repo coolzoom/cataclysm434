@@ -5214,6 +5214,10 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 37834:
                 spellInfo->Attributes |= SPELL_ATTR0_UNAFFECTED_BY_INVULNERABILITY;
                 break;
+            case 99511: // Simulate Alliance Presence
+            case 99508: // Throw Frog
+                spellInfo->RequiresSpellFocus = 0;
+                break;
             default:
                 break;
         }
