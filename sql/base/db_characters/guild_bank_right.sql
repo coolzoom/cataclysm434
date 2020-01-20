@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_bank_right`;
 
 CREATE TABLE `guild_bank_right` (

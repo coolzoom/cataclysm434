@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `petition_sign`;
 
 CREATE TABLE `petition_sign` (

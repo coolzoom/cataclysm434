@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `warden_action`;
 
 CREATE TABLE `warden_action` (

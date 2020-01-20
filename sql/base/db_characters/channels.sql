@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `channels`;
 
 CREATE TABLE `channels` (

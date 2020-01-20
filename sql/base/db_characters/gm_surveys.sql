@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `gm_surveys`;
 
 CREATE TABLE `gm_surveys` (

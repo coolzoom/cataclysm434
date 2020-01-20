@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `calendar_invites`;
 
 CREATE TABLE `calendar_invites` (

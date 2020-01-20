@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_achievement_progress`;
 
 CREATE TABLE `guild_achievement_progress` (

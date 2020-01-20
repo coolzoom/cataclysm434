@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `rbac_security_level_groups`;
 
 CREATE TABLE `rbac_security_level_groups` (

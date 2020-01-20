@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `gm_tickets`;
 
 CREATE TABLE `gm_tickets` (

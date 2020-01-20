@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `rbac_account_permissions`;
 
 CREATE TABLE `rbac_account_permissions` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_inventory`;
 
 CREATE TABLE `character_inventory` (

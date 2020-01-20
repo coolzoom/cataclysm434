@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_access`;
 
 CREATE TABLE `account_access` (

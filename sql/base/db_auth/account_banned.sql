@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_banned`;
 
 CREATE TABLE `account_banned` (

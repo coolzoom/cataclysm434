@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_gifts`;
 
 CREATE TABLE `character_gifts` (

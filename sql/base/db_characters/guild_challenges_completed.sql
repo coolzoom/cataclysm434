@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_challenges_completed`;
 
 CREATE TABLE `guild_challenges_completed` (

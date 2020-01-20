@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `item_loot_items`;
 
 CREATE TABLE `item_loot_items` (

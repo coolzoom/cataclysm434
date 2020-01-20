@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `pool_quest_save`;
 
 CREATE TABLE `pool_quest_save` (

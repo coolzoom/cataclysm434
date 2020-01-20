@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_old_member`;
 
 CREATE TABLE `guild_old_member` (

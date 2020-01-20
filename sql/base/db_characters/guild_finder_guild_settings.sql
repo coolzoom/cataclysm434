@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_finder_guild_settings`;
 
 CREATE TABLE `guild_finder_guild_settings` (

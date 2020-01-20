@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `lag_reports`;
 
 CREATE TABLE `lag_reports` (

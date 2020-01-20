@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_punishment`;
 
 CREATE TABLE `account_punishment` (

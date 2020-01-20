@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `auctionhouse`;
 
 CREATE TABLE `auctionhouse` (

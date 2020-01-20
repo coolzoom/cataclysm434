@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `realmlist`;
 
 CREATE TABLE `realmlist` (
@@ -16,7 +17,6 @@ CREATE TABLE `realmlist` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Realm System';
-
 
 INSERT INTO `realmlist` (`id`,`name`,`address`,`localAddress`,`localSubnetMask`,`port`,`icon`,`flag`,`timezone`,`allowedSecurityLevel`,`population`,`gamebuild`) VALUES
 (1,'cataclysm434','localhost','localhost','255.255.255.0',8085,0,0,0,0,0,15595);

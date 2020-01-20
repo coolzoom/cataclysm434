@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_bug_submission`;
 
 CREATE TABLE `character_bug_submission` (

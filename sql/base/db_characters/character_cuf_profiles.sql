@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_cuf_profiles`;
 
 CREATE TABLE `character_cuf_profiles` (

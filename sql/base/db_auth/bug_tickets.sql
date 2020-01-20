@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `bug_tickets`;
 
 CREATE TABLE `bug_tickets` (

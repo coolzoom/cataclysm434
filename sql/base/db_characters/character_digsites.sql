@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_digsites`;
 
 CREATE TABLE `character_digsites` (

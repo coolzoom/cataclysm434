@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `pvpstats_players`;
 
 CREATE TABLE `pvpstats_players` (

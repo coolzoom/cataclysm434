@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `instance`;
 
 CREATE TABLE `instance` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_premium`;
 
 CREATE TABLE `account_premium` (

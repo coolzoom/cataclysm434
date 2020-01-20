@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `item_instance`;
 
 CREATE TABLE `item_instance` (

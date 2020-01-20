@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `vip_accounts`;
 
 CREATE TABLE `vip_accounts` (

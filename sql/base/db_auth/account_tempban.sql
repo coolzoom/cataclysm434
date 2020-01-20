@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_tempban`;
 
 CREATE TABLE `account_tempban` (

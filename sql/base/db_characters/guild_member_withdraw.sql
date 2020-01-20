@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_member_withdraw`;
 
 CREATE TABLE `guild_member_withdraw` (

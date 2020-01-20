@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `game_event_condition_save`;
 
 CREATE TABLE `game_event_condition_save` (

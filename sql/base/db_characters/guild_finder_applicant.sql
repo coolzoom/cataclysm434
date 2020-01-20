@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_finder_applicant`;
 
 CREATE TABLE `guild_finder_applicant` (

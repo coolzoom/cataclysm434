@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `mail`;
 
 CREATE TABLE `mail` (

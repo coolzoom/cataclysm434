@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_void_storage`;
 
 CREATE TABLE `character_void_storage` (

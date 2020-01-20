@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `arena_team_member`;
 
 CREATE TABLE `arena_team_member` (

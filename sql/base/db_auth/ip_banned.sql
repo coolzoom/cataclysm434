@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `ip_banned`;
 
 CREATE TABLE `ip_banned` (

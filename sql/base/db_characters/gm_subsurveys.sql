@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `gm_subsurveys`;
 
 CREATE TABLE `gm_subsurveys` (

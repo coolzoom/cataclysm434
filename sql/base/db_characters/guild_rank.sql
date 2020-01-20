@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_rank`;
 
 CREATE TABLE `guild_rank` (

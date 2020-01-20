@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_declinedname`;
 
 CREATE TABLE `character_declinedname` (

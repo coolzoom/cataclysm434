@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_research_history`;
 
 CREATE TABLE `character_research_history` (

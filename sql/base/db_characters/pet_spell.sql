@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `pet_spell`;
 
 CREATE TABLE `pet_spell` (

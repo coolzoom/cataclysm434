@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `bugreport`;
 
 CREATE TABLE `bugreport` (

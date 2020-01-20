@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `worldstates`;
 
 CREATE TABLE `worldstates` (

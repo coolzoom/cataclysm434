@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `cronjobs`;
 
 CREATE TABLE `cronjobs` (

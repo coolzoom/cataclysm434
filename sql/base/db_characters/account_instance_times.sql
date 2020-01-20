@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_instance_times`;
 
 CREATE TABLE `account_instance_times` (

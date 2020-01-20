@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_currency`;
 
 CREATE TABLE `character_currency` (

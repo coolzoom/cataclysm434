@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_queststatus_rewarded`;
 
 CREATE TABLE `character_queststatus_rewarded` (

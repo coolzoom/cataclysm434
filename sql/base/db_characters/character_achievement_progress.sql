@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_achievement_progress`;
 
 CREATE TABLE `character_achievement_progress` (

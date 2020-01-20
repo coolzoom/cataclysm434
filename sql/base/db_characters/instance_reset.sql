@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `instance_reset`;
 
 CREATE TABLE `instance_reset` (

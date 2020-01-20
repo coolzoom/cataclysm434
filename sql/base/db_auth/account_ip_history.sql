@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_ip_history`;
 
 CREATE TABLE `account_ip_history` (

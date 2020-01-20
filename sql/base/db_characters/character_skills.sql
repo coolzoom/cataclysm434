@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_skills`;
 
 CREATE TABLE `character_skills` (

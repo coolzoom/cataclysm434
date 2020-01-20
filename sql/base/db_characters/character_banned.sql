@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_banned`;
 
 CREATE TABLE `character_banned` (

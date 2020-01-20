@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `group_member`;
 
 CREATE TABLE `group_member` (

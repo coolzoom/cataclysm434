@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_tutorial`;
 
 CREATE TABLE `account_tutorial` (

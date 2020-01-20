@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `lfg_data`;
 
 CREATE TABLE `lfg_data` (

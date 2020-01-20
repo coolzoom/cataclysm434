@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_glyphs`;
 
 CREATE TABLE `character_glyphs` (

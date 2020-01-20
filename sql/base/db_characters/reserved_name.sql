@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `reserved_name`;
 
 CREATE TABLE `reserved_name` (

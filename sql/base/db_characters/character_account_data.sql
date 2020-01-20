@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_account_data`;
 
 CREATE TABLE `character_account_data` (

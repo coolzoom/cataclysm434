@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_spell_cooldown`;
 
 CREATE TABLE `character_spell_cooldown` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `mail_items`;
 
 CREATE TABLE `mail_items` (

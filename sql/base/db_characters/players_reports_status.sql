@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `players_reports_status`;
 
 CREATE TABLE `players_reports_status` (

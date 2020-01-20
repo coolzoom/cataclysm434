@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_equipmentsets`;
 
 CREATE TABLE `character_equipmentsets` (

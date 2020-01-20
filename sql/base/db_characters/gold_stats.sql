@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `gold_stats`;
 
 CREATE TABLE `gold_stats` (

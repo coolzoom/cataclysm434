@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_spell`;
 
 CREATE TABLE `character_spell` (

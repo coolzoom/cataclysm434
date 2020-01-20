@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_social`;
 
 CREATE TABLE `character_social` (

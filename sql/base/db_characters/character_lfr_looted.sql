@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_lfr_looted`;
 
 CREATE TABLE `character_lfr_looted` (

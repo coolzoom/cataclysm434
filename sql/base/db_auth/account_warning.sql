@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `account_warning`;
 
 CREATE TABLE `account_warning` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `accounts_to_delete`;
 
 CREATE TABLE `accounts_to_delete` (

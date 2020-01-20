@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `logs`;
 
 CREATE TABLE `logs` (

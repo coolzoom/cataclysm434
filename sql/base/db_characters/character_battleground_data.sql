@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_battleground_data`;
 
 CREATE TABLE `character_battleground_data` (

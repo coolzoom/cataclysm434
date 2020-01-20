@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_action`;
 
 CREATE TABLE `character_action` (

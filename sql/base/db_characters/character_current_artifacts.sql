@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_current_artifacts`;
 
 CREATE TABLE `character_current_artifacts` (

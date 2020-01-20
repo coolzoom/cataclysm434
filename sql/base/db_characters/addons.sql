@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `addons`;
 
 CREATE TABLE `addons` (

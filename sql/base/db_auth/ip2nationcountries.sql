@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `ip2nationcountries`;
 
 CREATE TABLE `ip2nationcountries` (

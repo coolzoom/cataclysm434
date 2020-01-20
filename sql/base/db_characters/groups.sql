@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `groups`;
 
 CREATE TABLE `groups` (

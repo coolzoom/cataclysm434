@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_newslog`;
 
 CREATE TABLE `guild_newslog` (

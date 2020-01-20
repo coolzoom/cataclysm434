@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `autobroadcast`;
 
 CREATE TABLE `autobroadcast` (

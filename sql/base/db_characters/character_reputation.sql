@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_reputation`;
 
 CREATE TABLE `character_reputation` (

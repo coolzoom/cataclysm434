@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `pet_spell_cooldown`;
 
 CREATE TABLE `pet_spell_cooldown` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `item_soulbound_trade_data`;
 
 CREATE TABLE `item_soulbound_trade_data` (

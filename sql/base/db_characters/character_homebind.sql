@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_homebind`;
 
 CREATE TABLE `character_homebind` (

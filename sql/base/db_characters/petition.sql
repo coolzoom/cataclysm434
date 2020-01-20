@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `petition`;
 
 CREATE TABLE `petition` (

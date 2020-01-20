@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `character_aura`;
 
 CREATE TABLE `character_aura` (

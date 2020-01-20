@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `uptime`;
 
 CREATE TABLE `uptime` (

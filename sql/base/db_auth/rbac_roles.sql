@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `rbac_roles`;
 
 CREATE TABLE `rbac_roles` (

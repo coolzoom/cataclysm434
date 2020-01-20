@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `pet_aura`;
 
 CREATE TABLE `pet_aura` (

@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `guild_achievement`;
 
 CREATE TABLE `guild_achievement` (

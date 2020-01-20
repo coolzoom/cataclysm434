@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `corpse`;
 
 CREATE TABLE `corpse` (

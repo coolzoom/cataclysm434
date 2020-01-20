@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `daily_players_reports`;
 
 CREATE TABLE `daily_players_reports` (

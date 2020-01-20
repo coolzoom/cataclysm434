@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `calendar_events`;
 
 CREATE TABLE `calendar_events` (

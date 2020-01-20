@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `gameobject_respawn`;
 
 CREATE TABLE `gameobject_respawn` (

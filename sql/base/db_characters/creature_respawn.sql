@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `creature_respawn`;
 
 CREATE TABLE `creature_respawn` (
