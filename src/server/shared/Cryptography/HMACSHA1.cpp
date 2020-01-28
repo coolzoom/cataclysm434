@@ -20,15 +20,14 @@
 #include "BigNumber.h"
 #include "Common.h"
 
-HmacHash::HmacHash(uint32 len, uint8 *seed)
+HmacHash::HmacHash(uint32 len, uint8 *seed) : m_ctx(HMAC_CTX_new())
 {
-    HMAC_CTX_new();
     HMAC_Init_ex(m_ctx, seed, len, EVP_sha1(), NULL);
 }
 
 HmacHash::~HmacHash()
 {
-    HMAC_CTX_get_md(m_ctx);
+    HMAC_CTX_free(m_ctx);
 }
 
 void HmacHash::UpdateData(const std::string &str)
