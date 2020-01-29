@@ -224,7 +224,38 @@ public:
 
     static bool HandleServerIdleShutDownCommand(ChatHandler* /*handler*/, char const* args)
     {
-        return ShutdownServer(args, SHUTDOWN_MASK_IDLE, SHUTDOWN_EXIT_CODE);
+    	if (!*args)
+    		return false;
+
+    	char* timeStr = strtok((char*) args, " ");
+    	char* exitCodeStr = strtok(NULL, "");
+
+    	int32 time = atoi(timeStr);
+
+        // Prevent interpret wrong arg value as 0 secs shutdown time
+    	if ((time == 0 && (timeStr[0] != '0' || timeStr[1] != '\0')) || time < 0)
+    		return false;
+
+    	if (exitCodeStr)
+    	{
+    		int32 exitCode = atoi(exitCodeStr);
+
+            // Handle atoi() errors
+    		if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
+    			return false;
+
+            // Exit code should be in range of 0-125, 126-255 is used
+            // in many shells for their own return codes and code > 255
+            // is not supported in many others
+    		if (exitCode < 0 || exitCode > 125)
+    			return false;
+
+    		sWorld->ShutdownServ(time, SHUTDOWN_MASK_IDLE, exitCode);
+    	}
+    	else
+    		sWorld->ShutdownServ(time, SHUTDOWN_MASK_IDLE, SHUTDOWN_EXIT_CODE);
+
+    	return true;
     }
 
     // Exit the realm
