@@ -88,6 +88,7 @@ void LoginDatabaseConnection::DoPrepareStatements()
     PrepareStatement(LOGIN_SEL_REALMLIST_SECURITY_LEVEL, "SELECT allowedSecurityLevel from realmlist WHERE id = ?", CONNECTION_SYNCH);
     PrepareStatement(LOGIN_DEL_ACCOUNT, "DELETE FROM account WHERE id = ?", CONNECTION_ASYNC);
     PrepareStatement(LOGIN_INS_ACCOUNT_IP_HISTORY, "INSERT INTO account_ip_history (id,RealmID,ip) VALUES (?, ?, ?)", CONNECTION_ASYNC);
+    PrepareStatement(LOGIN_SEL_IP2NATION_COUNTRY, "SELECT c.country FROM ip2nationCountries c, ip2nation i WHERE i.ip < ? AND c.code = i.country ORDER BY i.ip DESC LIMIT 0,1", CONNECTION_ASYNC);
 
     //Support
     PrepareStatement(LOGIN_INS_BUG_TICKET, "INSERT INTO bug_tickets ( realm, guid, message, createTime, pool, mapId, posX, posY, posZ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);", CONNECTION_ASYNC);
