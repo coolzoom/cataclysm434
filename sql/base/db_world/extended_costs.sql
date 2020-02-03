@@ -1,0 +1,37 @@
+
+DROP TABLE IF EXISTS `extended_costs`;
+
+CREATE TABLE IF NOT EXISTS `extended_costs` (
+  `id` int(255) NOT NULL DEFAULT '0',
+  `unk1` varchar(255) NOT NULL,
+  `unk2` varchar(255) NOT NULL,
+  `unk3` varchar(255) NOT NULL,
+  `required_item1` varchar(255) NOT NULL,
+  `required_item2` varchar(255) NOT NULL,
+  `required_item3` varchar(255) NOT NULL,
+  `unk7` varchar(255) NOT NULL,
+  `unk8` varchar(255) NOT NULL,
+  `required_item1_amount` varchar(255) NOT NULL,
+  `required_item2_amount` varchar(255) NOT NULL,
+  `required_item3_amount` varchar(255) NOT NULL,
+  `unk12` varchar(255) NOT NULL,
+  `unk13` varchar(255) NOT NULL,
+  `required_arena_bg_rating` varchar(255) NOT NULL,
+  `unk15` varchar(255) NOT NULL,
+  `currency_type1` varchar(255) NOT NULL,
+  `currency_type2` varchar(255) NOT NULL,
+  `currency_type3` varchar(255) NOT NULL,
+  `unk19` varchar(255) NOT NULL,
+  `unk20` varchar(255) NOT NULL,
+  `currency_quantity1` varchar(255) NOT NULL,
+  `currency_quantity2` varchar(255) NOT NULL,
+  `currency_quantity3` varchar(255) NOT NULL,
+  `unk24` varchar(255) NOT NULL,
+  `unk25` varchar(255) NOT NULL,
+  `unk26` varchar(255) NOT NULL,
+  `unk27` varchar(255) NOT NULL,
+  `unk28` varchar(255) NOT NULL,
+  `unk29` varchar(255) NOT NULL,
+  `unk30` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
