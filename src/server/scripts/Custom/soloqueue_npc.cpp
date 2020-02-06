@@ -47,7 +47,7 @@ public:
         if (sSoloQueueMgr->IsPlayerInSoloQueue(player))
             player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, "Leave Solo queue", GOSSIP_SENDER_MAIN, 3, "Are you sure you want to remove the solo queue?", 0, false);
 
-        if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == NULL)
+        if (player->GetArenaTeamId(ArenaTeam::GetSlotByType(ARENA_TEAM_5v5)) == 0)
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, "Create new Solo arena team", GOSSIP_SENDER_MAIN, 1);
         else
         {
