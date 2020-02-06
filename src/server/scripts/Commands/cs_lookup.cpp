@@ -52,6 +52,12 @@ public:
             { "",               SEC_ADMINISTRATOR,  true,  &HandleLookupSpellCommand,           "" },
         };
 
+        static std::vector<ChatCommand> lookupQuestCommandTable =
+        {
+            { "id",             SEC_MODERATOR,  true,  &HandleLookupQuestIdCommand,         "" },
+            { "",               SEC_MODERATOR,  true,  &HandleLookupQuestCommand,           "" },
+        };
+
         static std::vector<ChatCommand> lookupCommandTable =
         {
             { "area",           SEC_MODERATOR,      true,  &HandleLookupAreaCommand,            "" },
@@ -61,7 +67,7 @@ public:
             { "item",           SEC_ADMINISTRATOR,  true,  &HandleLookupItemCommand,            "" },
             { "itemset",        SEC_ADMINISTRATOR,  true,  &HandleLookupItemSetCommand,         "" },
             { "object",         SEC_ADMINISTRATOR,  true,  &HandleLookupObjectCommand,          "" },
-            { "quest",          SEC_ADMINISTRATOR,  true,  &HandleLookupQuestCommand,           "" },
+            { "quest",          SEC_ADMINISTRATOR,  true,  NULL,                                "", lookupQuestCommandTable },
             { "player",         SEC_GAMEMASTER,     true,  NULL,                                "", lookupPlayerCommandTable },
             { "skill",          SEC_ADMINISTRATOR,  true,  &HandleLookupSkillCommand,           "" },
             { "spell",          SEC_ADMINISTRATOR,  true,  NULL,                                "", lookupSpellCommandTable },
@@ -689,6 +695,62 @@ public:
 
         if (!found)
             handler->SendSysMessage(LANG_COMMAND_NOQUESTFOUND);
+
+        return true;
+    }
+
+    static bool HandleLookupQuestIdCommand(ChatHandler* handler, char const* args) {
+
+        if (!*args)
+            return false;
+
+        bool found = false;
+
+        Player* target = handler->getSelectedPlayer();
+
+        uint32 id = atoi((char*)args);
+
+        if (Quest const* quest = sObjectMgr->GetQuestTemplate(id))
+        {
+
+            std::string title = quest->GetTitle();
+            if (title.empty())
+                return false;
+
+            char const* statusStr = "";
+
+            if (target)
+            {
+                QuestStatus status = target->GetQuestStatus(quest->GetQuestId());
+
+                switch (status)
+                {
+                case QUEST_STATUS_COMPLETE:
+                    statusStr = handler->GetTrinityString(LANG_COMMAND_QUEST_COMPLETE);
+                    break;
+                case QUEST_STATUS_INCOMPLETE:
+                    statusStr = handler->GetTrinityString(LANG_COMMAND_QUEST_ACTIVE);
+                    break;
+                case QUEST_STATUS_REWARDED:
+                    statusStr = handler->GetTrinityString(LANG_COMMAND_QUEST_REWARDED);
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            if (handler->GetSession())
+                handler->PSendSysMessage(LANG_QUEST_LIST_CHAT, quest->GetQuestId(), quest->GetQuestId(), quest->GetQuestLevel(), title.c_str(), statusStr);
+            else
+                handler->PSendSysMessage(LANG_QUEST_LIST_CONSOLE, quest->GetQuestId(), title.c_str(), statusStr);
+            found = true;
+        }
+
+
+        if (!found) {
+            handler->SendSysMessage(LANG_COMMAND_NOQUESTFOUND);
+        }
+
 
         return true;
     }
