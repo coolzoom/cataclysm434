@@ -37,8 +37,6 @@
 void InstanceScript::SaveToDB()
 {
     std::string data = GetSaveData();
-    if (data.empty())
-        return;
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_INSTANCE_DATA);
     stmt->setUInt32(0, GetCompletedEncounterMask());
@@ -374,21 +372,6 @@ void InstanceScript::ReadSaveDataBossStates(std::istringstream& data)
     }
 }
 
-std::string InstanceScript::GetSaveData()
-{
-    OUT_SAVE_INST_DATA;
-
-    std::ostringstream saveStream;
-
-    WriteSaveDataHeaders(saveStream);
-    WriteSaveDataBossStates(saveStream);
-    WriteSaveDataMore(saveStream);
-
-    OUT_SAVE_INST_DATA_COMPLETE;
-
-    return saveStream.str();
-}
-
 void InstanceScript::WriteSaveDataHeaders(std::ostringstream& data)
 {
     for (char header : headers)
@@ -409,6 +392,14 @@ void InstanceScript::HandleGameObject(uint64 guid, bool open, GameObject* go /*=
         go->SetGoState(open ? GO_STATE_ACTIVE : GO_STATE_READY);
     else
         TC_LOG_DEBUG("scripts", "InstanceScript: HandleGameObject failed");
+}
+
+std::string InstanceScript::GetBossSaveData()
+{
+    std::ostringstream saveStream;
+    for (std::vector<BossInfo>::iterator i = bosses.begin(); i != bosses.end(); ++i)
+        saveStream << (uint32)i->state << ' ';
+    return saveStream.str();
 }
 
 void InstanceScript::DoUseDoorOrButton(uint64 guid, uint32 withRestoreTime /*= 0*/, bool useAlternativeState /*= false*/)
