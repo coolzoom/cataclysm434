@@ -1,20 +1,9 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2016+     AzerothCore <www.azerothcore.org>
+* Released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
+* Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+*/
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -22,16 +11,16 @@
 
 enum Spells
 {
-    SPELL_CURSEOFBLOOD              = 24673,
-    SPELL_HEX                       = 16708,
-    SPELL_CLEAVE                    = 20691,
+    SPELL_CURSEOFBLOOD = 24673,
+    SPELL_HEX = 16708,
+    SPELL_CLEAVE = 20691,
 };
 
 enum Events
 {
-    EVENT_CURSE_OF_BLOOD            = 1,
-    EVENT_HEX                       = 2,
-    EVENT_CLEAVE                    = 3,
+    EVENT_CURSE_OF_BLOOD = 1,
+    EVENT_HEX = 2,
+    EVENT_CLEAVE = 3,
 };
 
 class boss_shadow_hunter_voshgajin : public CreatureScript
@@ -46,20 +35,19 @@ public:
 
     struct boss_shadowvoshAI : public BossAI
     {
-        boss_shadowvoshAI(Creature* creature) : BossAI(creature, DATA_SHADOW_HUNTER_VOSHGAJIN) {}
+        boss_shadowvoshAI(Creature* creature) : BossAI(creature, DATA_SHADOW_HUNTER_VOSHGAJIN) { }
 
         void Reset()
         {
             _Reset();
-            //DoCast(me, SPELL_ICEARMOR, true);
         }
 
         void EnterCombat(Unit* /*who*/)
         {
             _EnterCombat();
-            events.ScheduleEvent(EVENT_CURSE_OF_BLOOD, 2 * IN_MILLISECONDS);
-            events.ScheduleEvent(EVENT_HEX,     8 * IN_MILLISECONDS);
-            events.ScheduleEvent(EVENT_CLEAVE, 14 * IN_MILLISECONDS);
+            events.ScheduleEvent(EVENT_CURSE_OF_BLOOD, 2000);
+            events.ScheduleEvent(EVENT_HEX, 8000);
+            events.ScheduleEvent(EVENT_CLEAVE, 14000);
         }
 
         void JustDied(Unit* /*killer*/)
@@ -67,7 +55,7 @@ public:
             _JustDied();
         }
 
-        void UpdateAI(uint32 const diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
@@ -83,23 +71,22 @@ public:
                 {
                     case EVENT_CURSE_OF_BLOOD:
                         DoCastVictim(SPELL_CURSEOFBLOOD);
-                        events.ScheduleEvent(EVENT_CURSE_OF_BLOOD, 45 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_CURSE_OF_BLOOD, 45000);
                         break;
                     case EVENT_HEX:
                         if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                             DoCast(target, SPELL_HEX);
-                        events.ScheduleEvent(EVENT_HEX, 15 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_HEX, 15000);
                         break;
                     case EVENT_CLEAVE:
                         DoCastVictim(SPELL_CLEAVE);
-                        events.ScheduleEvent(EVENT_CLEAVE, 7 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_CLEAVE, 7000);
                         break;
                 }
             }
             DoMeleeAttackIfReady();
         }
     };
-
 };
 
 void AddSC_boss_shadowvosh()
