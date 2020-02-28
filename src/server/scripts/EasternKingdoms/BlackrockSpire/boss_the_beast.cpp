@@ -1,20 +1,9 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
- * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2016+     AzerothCore <www.azerothcore.org>
+* Released under GNU GPL v2 license: https://github.com/azerothcore/azerothcore-wotlk/blob/master/LICENSE-GPL2
+* Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
+* Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
+*/
 
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -22,16 +11,16 @@
 
 enum Spells
 {
-    SPELL_FLAMEBREAK                = 16785,
-    SPELL_IMMOLATE                  = 20294,
-    SPELL_TERRIFYINGROAR            = 14100,
+    SPELL_FLAMEBREAK = 16785,
+    SPELL_IMMOLATE = 20294,
+    SPELL_TERRIFYINGROAR = 14100,
 };
 
 enum Events
 {
-    EVENT_FLAME_BREAK              = 1,
-    EVENT_IMMOLATE                 = 2,
-    EVENT_TERRIFYING_ROAR          = 3,
+    EVENT_FLAME_BREAK = 1,
+    EVENT_IMMOLATE = 2,
+    EVENT_TERRIFYING_ROAR = 3,
 };
 
 class boss_the_beast : public CreatureScript
@@ -46,7 +35,7 @@ public:
 
     struct boss_thebeastAI : public BossAI
     {
-        boss_thebeastAI(Creature* creature) : BossAI(creature, DATA_THE_BEAST) {}
+        boss_thebeastAI(Creature* creature) : BossAI(creature, DATA_THE_BEAST) { }
 
         void Reset()
         {
@@ -56,9 +45,9 @@ public:
         void EnterCombat(Unit* /*who*/)
         {
             _EnterCombat();
-            events.ScheduleEvent(EVENT_FLAME_BREAK,     12 * IN_MILLISECONDS);
-            events.ScheduleEvent(EVENT_IMMOLATE,         3 * IN_MILLISECONDS);
-            events.ScheduleEvent(EVENT_TERRIFYING_ROAR, 23 * IN_MILLISECONDS);
+            events.ScheduleEvent(EVENT_FLAME_BREAK, 12000);
+            events.ScheduleEvent(EVENT_IMMOLATE, 3000);
+            events.ScheduleEvent(EVENT_TERRIFYING_ROAR, 23000);
         }
 
         void JustDied(Unit* /*killer*/)
@@ -66,12 +55,12 @@ public:
             _JustDied();
         }
 
-        void UpdateAI(uint32 const diff)
+        void UpdateAI(uint32 diff)
         {
             if (!UpdateVictim())
                 return;
 
-             events.Update(diff);
+            events.Update(diff);
 
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
@@ -82,16 +71,16 @@ public:
                 {
                     case EVENT_FLAME_BREAK:
                         DoCastVictim(SPELL_FLAMEBREAK);
-                        events.ScheduleEvent(EVENT_FLAME_BREAK, 10 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_FLAME_BREAK, 10000);
                         break;
                     case EVENT_IMMOLATE:
                         if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                             DoCast(target, SPELL_IMMOLATE);
-                        events.ScheduleEvent(EVENT_IMMOLATE, 8 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_IMMOLATE, 8000);
                         break;
                     case EVENT_TERRIFYING_ROAR:
                         DoCastVictim(SPELL_TERRIFYINGROAR);
-                        events.ScheduleEvent(EVENT_TERRIFYING_ROAR, 20 * IN_MILLISECONDS);
+                        events.ScheduleEvent(EVENT_TERRIFYING_ROAR, 20000);
                         break;
                 }
             }

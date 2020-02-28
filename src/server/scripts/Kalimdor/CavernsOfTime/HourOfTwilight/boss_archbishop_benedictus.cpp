@@ -801,7 +801,7 @@ public:
         {
             if (Creature* darkHaze = me->FindNearestCreature(NPC_DARK_HAZE, 100.0f, true))
             {
-                darkHaze->AI()->Talk(TALK_THRALL_3_WARNING_GROUP, NULL, CHAT_MSG_RAID_BOSS_EMOTE);
+                darkHaze->AI()->Talk(TALK_THRALL_3_WARNING_GROUP, 0, CHAT_MSG_RAID_BOSS_EMOTE);
                 darkHaze->RemoveAura(SPELL_SHADOW_FOG);
                 darkHaze->RemoveAura(SPELL_POOLED_BLOOD_VISUAL_GROWTH);
                 darkHaze->DespawnOrUnsummon(3000);

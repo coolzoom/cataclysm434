@@ -75,14 +75,6 @@ public:
             { "closed",         SEC_ADMINISTRATOR,  true,  &HandleServerSetClosedCommand,           "" },
         };
 
-        static std::vector<ChatCommand> serverShellCommandTable =
-        {
-            { "update",         SEC_ADMINISTRATOR,  true, &HandleServerShellUpdateCommand,        "" },
-            { "restore",        SEC_ADMINISTRATOR,  true, &HandleServerShellRestoreCommand,       "" },
-            { "status",         SEC_ADMINISTRATOR,  true, &HandleServerShellStatusCommand,        "" },
-            { "switchbranch",   SEC_ADMINISTRATOR,  true, &HandleServerShellSwitchBranchCommand,  "" },
-        };
-
         static std::vector<ChatCommand> serverCommandTable =
         {
             { "corpses",        SEC_GAMEMASTER,     true,  &HandleServerCorpsesCommand,             "" },
@@ -95,7 +87,6 @@ public:
             { "restart",        SEC_ADMINISTRATOR,  true,  NULL,                                    "", serverRestartCommandTable },
             { "shutdown",       SEC_ADMINISTRATOR,  true,  NULL,                                    "", serverShutdownCommandTable },
             { "set",            SEC_ADMINISTRATOR,  true,  NULL,                                    "", serverSetCommandTable },
-            { "shell",          SEC_ADMINISTRATOR,  true, NULL,                                     "", serverShellCommandTable },
         };
 
          static std::vector<ChatCommand> commandTable =
@@ -105,7 +96,6 @@ public:
         return commandTable;
     }
 
-    // Triggering corpses expire check in world
     static bool HandleServerCorpsesCommand(ChatHandler* /*handler*/, char const* /*args*/)
     {
         sObjectAccessor->RemoveOldCorpses();
@@ -123,7 +113,6 @@ public:
         std::string uptime          = secsToTimeString(sWorld->GetUptime());
         uint32 updateTime           = sWorld->GetUpdateTime();
 
-        handler->SendSysMessage(_FULLVERSION);
         handler->PSendSysMessage(LANG_CONNECTED_PLAYERS, playersNum, maxPlayersNum);
         handler->PSendSysMessage(LANG_CONNECTED_USERS, activeClientsNum, maxActiveClientsNum, queuedClientsNum, maxQueuedClientsNum);
         handler->PSendSysMessage(LANG_UPTIME, uptime.c_str());
@@ -209,22 +198,145 @@ public:
 
     static bool HandleServerShutDownCommand(ChatHandler* /*handler*/, char const* args)
     {
-        return ShutdownServer(args, 0, SHUTDOWN_EXIT_CODE);
+        if (!*args)
+            return false;
+
+        char* timeStr = strtok((char*) args, " ");
+        char* exitCodeStr = strtok(NULL, "");
+
+        int32 time = atoi(timeStr);
+
+        // Prevent interpret wrong arg value as 0 secs shutdown time
+        if ((time == 0 && (timeStr[0] != '0' || timeStr[1] != '\0')) || time < 0)
+            return false;
+
+        if (exitCodeStr)
+        {
+            int32 exitCode = atoi(exitCodeStr);
+
+            // Handle atoi() errors
+            if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
+                return false;
+
+            // Exit code should be in range of 0-125, 126-255 is used
+            // in many shells for their own return codes and code > 255
+            // is not supported in many others
+            if (exitCode < 0 || exitCode > 125)
+                return false;
+
+            sWorld->ShutdownServ(time, 0, exitCode);
+        }
+        else
+            sWorld->ShutdownServ(time, 0, SHUTDOWN_EXIT_CODE);
+
+        return true;
     }
 
     static bool HandleServerRestartCommand(ChatHandler* /*handler*/, char const* args)
     {
-        return ShutdownServer(args, SHUTDOWN_MASK_RESTART, RESTART_EXIT_CODE);
+        if (!*args)
+            return false;
+
+        char* timeStr = strtok((char*) args, " ");
+        char* exitCodeStr = strtok(NULL, "");
+
+        int32 time = atoi(timeStr);
+
+        //  Prevent interpret wrong arg value as 0 secs shutdown time
+        if ((time == 0 && (timeStr[0] != '0' || timeStr[1] != '\0')) || time < 0)
+            return false;
+
+        if (exitCodeStr)
+        {
+            int32 exitCode = atoi(exitCodeStr);
+
+            // Handle atoi() errors
+            if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
+                return false;
+
+            // Exit code should be in range of 0-125, 126-255 is used
+            // in many shells for their own return codes and code > 255
+            // is not supported in many others
+            if (exitCode < 0 || exitCode > 125)
+                return false;
+
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_RESTART, exitCode);
+        }
+        else
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_RESTART, RESTART_EXIT_CODE);
+
+            return true;
     }
 
     static bool HandleServerIdleRestartCommand(ChatHandler* /*handler*/, char const* args)
     {
-        return ShutdownServer(args, SHUTDOWN_MASK_RESTART | SHUTDOWN_MASK_IDLE, RESTART_EXIT_CODE);
+        if (!*args)
+            return false;
+
+        char* timeStr = strtok((char*) args, " ");
+        char* exitCodeStr = strtok(NULL, "");
+
+        int32 time = atoi(timeStr);
+
+        // Prevent interpret wrong arg value as 0 secs shutdown time
+        if ((time == 0 && (timeStr[0] != '0' || timeStr[1] != '\0')) || time < 0)
+            return false;
+
+        if (exitCodeStr)
+        {
+            int32 exitCode = atoi(exitCodeStr);
+
+            // Handle atoi() errors
+            if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
+                return false;
+
+            // Exit code should be in range of 0-125, 126-255 is used
+            // in many shells for their own return codes and code > 255
+            // is not supported in many others
+            if (exitCode < 0 || exitCode > 125)
+                return false;
+
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_RESTART | SHUTDOWN_MASK_IDLE, exitCode);
+        }
+        else
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_RESTART | SHUTDOWN_MASK_IDLE, RESTART_EXIT_CODE);
+        return true;
     }
 
     static bool HandleServerIdleShutDownCommand(ChatHandler* /*handler*/, char const* args)
     {
-        return ShutdownServer(args, SHUTDOWN_MASK_IDLE, SHUTDOWN_EXIT_CODE);
+        if (!*args)
+            return false;
+
+        char* timeStr = strtok((char*) args, " ");
+        char* exitCodeStr = strtok(NULL, "");
+
+        int32 time = atoi(timeStr);
+
+        // Prevent interpret wrong arg value as 0 secs shutdown time
+        if ((time == 0 && (timeStr[0] != '0' || timeStr[1] != '\0')) || time < 0)
+            return false;
+
+        if (exitCodeStr)
+        {
+            int32 exitCode = atoi(exitCodeStr);
+
+            // Handle atoi() errors
+            if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
+                return false;
+
+            // Exit code should be in range of 0-125, 126-255 is used
+            // in many shells for their own return codes and code > 255
+            // is not supported in many others
+            if (exitCode < 0 || exitCode > 125)
+                return false;
+
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_IDLE, exitCode);
+        }
+        else
+            sWorld->ShutdownServ(time, SHUTDOWN_MASK_IDLE, SHUTDOWN_EXIT_CODE);
+
+        return true;
     }
 
     // Exit the realm
@@ -297,145 +409,6 @@ public:
 
         sWorld->SetRecordDiffInterval(newTime);
         printf("Record diff every %u ms\n", newTime);
-
-        return true;
-    }
-
-    static bool HandleServerShellUpdateCommand(ChatHandler* handler, char const* /*args*/)
-    {
-        if (sWorld->GetServerUpdateState() == SERVER_STATE_COMPILING)
-        {
-            handler->SendSysMessage("Core is already updating!");
-            return true;
-        }
-
-        system((FM_CORE_SHELL + "update").c_str());
-
-        sWorld->SetServerUpdateState(SERVER_STATE_COMPILING);
-        handler->SendSysMessage("Core Update started! This takes at least 10 minutes!");
-        return true;
-    }
-
-    static bool HandleServerShellRestoreCommand(ChatHandler* handler, char const* /*args*/)
-    {
-        system((FM_CORE_SHELL + "restore").c_str());
-        sWorld->SetServerUpdateState(SERVER_STATE_RESTORING);
-        handler->SendSysMessage("Core restore started");
-        return true;
-    }
-
-    static bool HandleServerShellStatusCommand(ChatHandler* handler, char const* /*args*/)
-    {
-        switch (sWorld->GetServerUpdateState())
-        {
-            case SERVER_STATE_READY:
-                handler->SendSysMessage("Server is ready for update!");
-                break;
-            case SERVER_STATE_COMPILING:
-                handler->SendSysMessage("Server is compiling! Please wait until compile is finished.");
-                break;
-            case SERVER_STATE_RESTORING:
-                handler->SendSysMessage("Restoring last core revision. Please wait until restoration is finished.");
-                break;
-            default:
-                handler->SendSysMessage("A compile error occured! Fix it and build again!");
-                break;
-        }
-        return true;
-    }
-
-    static bool HandleServerShellSwitchBranchCommand(ChatHandler* handler, char const* args)
-    {
-        if (!args)
-            return false;
-        char* newBranch = handler->extractQuotedArg((char*)args);
-        if (!newBranch)
-            return false;
-
-        std::string output = "Branch switched to ";
-        output.append(newBranch);
-
-        system((FM_CORE_SHELL + "switchbranch " + newBranch).c_str());
-        handler->SendSysMessage(output.c_str());
-        return true;
-    }
-
-    static bool HandleServerStateCommand(ChatHandler* /*handler*/, char const* args)
-    {
-        if (!*args)
-            return false;
-        uint8 state = atoi((char*)args);
-        sWorld->SetServerUpdateState(state);
-        return true;
-    }
-
-private:
-    static bool ParseExitCode(char const* exitCodeStr, int32& exitCode)
-    {
-        exitCode = atoi(exitCodeStr);
-
-        // Handle atoi() errors
-        if (exitCode == 0 && (exitCodeStr[0] != '0' || exitCodeStr[1] != '\0'))
-            return false;
-
-        // Exit code should be in range of 0-125, 126-255 is used
-        // in many shells for their own return codes and code > 255
-        // is not supported in many others
-        if (exitCode < 0 || exitCode > 125)
-            return false;
-
-        return true;
-    }
-
-    static bool ShutdownServer(char const* args, uint32 shutdownMask, int32 defaultExitCode)
-    {
-        if (!*args)
-            return false;
-
-        if (strlen(args) > 255)
-            return false;
-
-        // #delay [#exit_code] [reason]
-        char* delayStr = strtok((char*)args, " ");
-        if (!delayStr)
-            return false;
-
-        char* exitCodeStr = nullptr;
-
-        char reason[256] = { 0 };
-
-        while (char* nextToken = strtok(nullptr, " "))
-        {
-            if (isNumeric(nextToken))
-                exitCodeStr = nextToken;
-            else
-            {
-                strcat(reason, nextToken);
-                if (char* remainingTokens = strtok(nullptr, "\0"))
-                {
-                    strcat(reason, " ");
-                    strcat(reason, remainingTokens);
-                }
-                break;
-            }
-        }
-
-        int32 delay = TimeStringToSecs(delayStr);
-
-        // Prevent interpret wrong arg value as 0 secs shutdown time
-        if ((delay == 0 && (delayStr[0] != '0' || delayStr[1] != '\0')) || delay < 0)
-            return false;
-
-        // Min 15 Minutes restart time on our live realms ...
-        if (delay < 900)
-            delay = 900;
-
-        int32 exitCode = defaultExitCode;
-        if (exitCodeStr)
-            if (!ParseExitCode(exitCodeStr, exitCode))
-                return false;
-
-        sWorld->ShutdownServ(delay, shutdownMask, static_cast<uint8>(exitCode), std::string(reason));
 
         return true;
     }

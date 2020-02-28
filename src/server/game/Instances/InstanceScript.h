@@ -162,8 +162,8 @@ class InstanceScript : public ZoneScript
         // On load
         virtual void Load(char const* data);
 
-        // When save is needed, this function generates the data
-        virtual std::string GetSaveData();
+        //When save is needed, this function generates the data
+        virtual std::string GetSaveData() { return GetBossSaveData(); }
 
         void SaveToDB();
 
@@ -305,7 +305,7 @@ class InstanceScript : public ZoneScript
 
         void UpdateDoorState(GameObject* door);
         void UpdateMinionState(Creature* minion, EncounterState state);
-
+        std::string GetBossSaveData();
         void AddTeleporter(uint64 guid);
 
         // Instance Load and Save

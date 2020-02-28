@@ -272,7 +272,7 @@ public:
                         _introDone = true;
                         me->SetReactState(REACT_AGGRESSIVE);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
-                        Talk(TALK_EMOTE_TWILIGHT_FORCES, NULL, CHAT_MSG_RAID_BOSS_EMOTE);
+                        Talk(TALK_EMOTE_TWILIGHT_FORCES, 0, CHAT_MSG_RAID_BOSS_EMOTE);
                         if (Creature* thrall = instance->GetCreature(DATA_THRALL_EVENT_1))
                             thrall->AI()->Talk(TALK_THRALL_2_ENTER_COMBAT);
                         break;

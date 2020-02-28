@@ -17868,7 +17868,7 @@ void Unit::SendPlaySpellVisualKit(uint32 id, uint32 unkParam)
 void Unit::SendPlaySpellVisual(uint32 id, Unit* target, float x, float y, float z, float o)
 {
     ObjectGuid guid = GetGUID();
-    ObjectGuid targetGuid = target ? target->GetGUID() : NULL;
+    ObjectGuid targetGuid = target ? target->GetGUID() : 0;
 
     WorldPacket data(SMSG_PLAY_SPELL_VISUAL, 4 + 4 + 4 + 8);
     data << float(z);

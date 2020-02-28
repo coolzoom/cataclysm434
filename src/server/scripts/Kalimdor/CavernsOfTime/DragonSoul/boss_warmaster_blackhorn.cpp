@@ -505,7 +505,7 @@ public:
                         events.ScheduleEvent(EVENT_DEVASTATE, 8500);
                         break;
                     case EVENT_DISRUPTING_ROAR:
-                        Talk(EMOTE_DISRUPTING_ROAR, NULL, CHAT_MSG_EMOTE);
+                        Talk(EMOTE_DISRUPTING_ROAR, 0, CHAT_MSG_EMOTE);
                         DoCast(me, SPELL_DISRUPTING_ROAR, true);
                         events.ScheduleEvent(EVENT_DISRUPTING_ROAR, 18500);
                         break;

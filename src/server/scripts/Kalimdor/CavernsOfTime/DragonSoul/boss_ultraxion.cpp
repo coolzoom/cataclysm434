@@ -608,7 +608,7 @@ public:
                 switch (eventid)
                 {
                     case EVENT_INTRO_TWILIGHT_REALM:
-                        Talk(EMOTE_TWILIGHT_REALM, NULL, CHAT_MSG_RAID_BOSS_EMOTE, TEXT_RANGE_MAP);
+                        Talk(EMOTE_TWILIGHT_REALM, 0, CHAT_MSG_RAID_BOSS_EMOTE, TEXT_RANGE_MAP);
                         DoCastAOE(SPELL_TWILIGHT_SHIFT, true);
                         events.ScheduleEvent(EVENT_INTRO_YELL, 4000);
                         break;
@@ -853,22 +853,22 @@ public:
                         break;
                     case EVENT_DEATHWING_OUTRO:
                         if (Creature* deathwing = instance->GetCreature(DATA_DEATHWING_ULTRAXION))
-                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING, NULL, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
+                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING, 0, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
                         events.ScheduleEvent(EVENT_DEATHWING_OUTRO_2, 14000);
                         break;
                     case EVENT_DEATHWING_OUTRO_2:
                         if (Creature* deathwing = instance->GetCreature(DATA_DEATHWING_ULTRAXION))
-                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING_2, NULL, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
+                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING_2, 0, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
                         events.ScheduleEvent(EVENT_DEATHWING_OUTRO_3, 14000);
                         break;
                     case EVENT_DEATHWING_OUTRO_3:
                         if (Creature* deathwing = instance->GetCreature(DATA_DEATHWING_ULTRAXION))
-                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING_3, NULL, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
+                            deathwing->AI()->Talk(TALK_GAUNTLET_OUTRO_DEATHWING_3, 0, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
                         events.ScheduleEvent(EVENT_YSERA_OUTRO, 12000);
                         break;
                     case EVENT_YSERA_OUTRO:
                         if (Creature* ysera = instance->GetCreature(DATA_YSERA_ULTRAXION))
-                            ysera->AI()->Talk(TALK_GAUNTLET_ULTRAXION_SUMMON_YSERA, NULL, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
+                            ysera->AI()->Talk(TALK_GAUNTLET_ULTRAXION_SUMMON_YSERA, 0, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
                         events.ScheduleEvent(EVENT_SUMMON_ULTRAXION, 6000);
                         break;
                     case EVENT_SUMMON_ULTRAXION:
@@ -1216,12 +1216,12 @@ public:
                     // Gauntlet Intro
                     case EVENT_DEATHWING_INTRO:
                         if (Creature* deathwing = instance->GetCreature(DATA_DEATHWING_ULTRAXION))
-                            deathwing->AI()->Talk(TALK_GAUNTLET_INTRO_DEATHWING, NULL, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
+                            deathwing->AI()->Talk(TALK_GAUNTLET_INTRO_DEATHWING, 0, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
                         events.ScheduleEvent(EVENT_DEATHWING_INTRO_2, 11000);
                         break;
                     case EVENT_DEATHWING_INTRO_2:
                         if (Creature* deathwing = instance->GetCreature(DATA_DEATHWING_ULTRAXION))
-                            deathwing->AI()->Talk(TALK_GAUNTLET_INTRO_DEATHWING_2, NULL, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
+                            deathwing->AI()->Talk(TALK_GAUNTLET_INTRO_DEATHWING_2, 0, CHAT_MSG_MONSTER_YELL, TEXT_RANGE_MAP);
 
                         if (Creature* gauntlet = instance->GetCreature(DATA_GAUNTLET_TRIGGER))
                             gauntlet->AI()->DoAction(ACTION_START_ULTRAXION_GAUNTLET);
@@ -1240,7 +1240,7 @@ public:
 
                         if (Creature* alexstrasza = instance->GetCreature(DATA_ALEXSTRASZA_ULTRAXION))
                         {
-                            alexstrasza->AI()->Talk(TALK_GAUNTLET_INTRO_ALEXSTRASZA, NULL, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
+                            alexstrasza->AI()->Talk(TALK_GAUNTLET_INTRO_ALEXSTRASZA, 0, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
                             alexstrasza->InterruptSpell(CURRENT_CHANNELED_SPELL);
                             alexstrasza->SetDisableGravity(true);
                             alexstrasza->AddUnitState(MOVEMENTFLAG_HOVER);
@@ -1602,7 +1602,7 @@ public:
         void HandleScriptEffect(SpellEffIndex effIndex)
         {
             if (GetHitUnit()->ToCreature())
-                GetHitUnit()->ToCreature()->AI()->Talk(-GetSpellInfo()->Effects[effIndex].BasePoints, NULL, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
+                GetHitUnit()->ToCreature()->AI()->Talk(-GetSpellInfo()->Effects[effIndex].BasePoints, 0, CHAT_MSG_MONSTER_SAY, TEXT_RANGE_MAP);
         }
 
         void Register()
